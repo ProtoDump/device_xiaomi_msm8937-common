@@ -73,6 +73,9 @@ persist.debug.wfd.enable=1
 persist.hwc.enable_vds=1
 debug.sdm.support_writeback=0
 
+# DPM
+persist.vendor.dpm.feature=0
+
 # DRM
 drm.service.enabled=true
 
