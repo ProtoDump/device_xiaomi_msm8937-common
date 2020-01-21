@@ -35,3 +35,5 @@ allow hal_fingerprint_default keystore:keystore_key { add_auth };
 set_prop(hal_fingerprint_default, system_prop)
 binder_call(hal_fingerprint_default, gx_fpd)
 binder_use(hal_fingerprint_default)
+
+r_dir_file(hal_fingerprint_default, sysfs_devfreq)
