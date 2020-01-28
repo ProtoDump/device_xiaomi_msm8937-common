@@ -283,11 +283,9 @@ vendor/lib64/hw/gatekeeper.msm8937.so:vendor/lib64/hw/gatekeeper.msm8937.so
 
 # GPS - from Panther
 etc/permissions/com.qti.location.sdk.xml
-etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
 -framework/com.qti.location.sdk.jar
 -framework/izat.xt.srv.jar
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
 lib/vendor.qti.gnss@1.0.so
 lib/vendor.qti.gnss@1.1.so
 lib/vendor.qti.gnss@1.2.so
