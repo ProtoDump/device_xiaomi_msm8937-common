@@ -1,3 +1,5 @@
+typeattribute rild data_between_core_and_vendor_violators;
+
 allow rild vendor_file:file r_file_perms;
 r_dir_file(rild, tombstone_data_file)
 get_prop(rild, radio_prop)

@@ -1,5 +1,6 @@
 # /data/goodix labeling
 type_transition tee system_data_file:{ dir file } gx_fpd_data_file;
+typeattribute tee data_between_core_and_vendor_violators;
 
 # allow storing goodix data
 allow tee mnt_vendor_file:dir search;
