@@ -153,7 +153,8 @@ PRODUCT_PACKAGES += \
     libhwc2on1adapter \
     libgenlock \
     libtinyxml \
-    libqdMetaData.system
+    libqdMetaData.system \
+    libqti_vndfwk_detect
 
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
