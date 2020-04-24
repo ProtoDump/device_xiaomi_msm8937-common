@@ -403,6 +403,7 @@ PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg \
     wificond \
     libwpa_client \
+    WifiOverlay \
     wpa_supplicant \
     wpa_supplicant.conf
 
