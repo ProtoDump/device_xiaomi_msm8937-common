@@ -10,7 +10,7 @@ LOCAL_SRC_FILES := \
     service.cpp
 
 LOCAL_SHARED_LIBRARIES := \
-    libbinder \
+    libgxbinder \
     libcutils \
     liblog \
     libhidlbase \
