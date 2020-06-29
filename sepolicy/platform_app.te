@@ -1,0 +1,1 @@
+allow platform_app boottime_prop:file { read };
