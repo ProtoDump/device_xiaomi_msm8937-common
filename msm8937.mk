@@ -189,19 +189,11 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl-qti \
-    android.hardware.gnss@1.0-service-qti \
-    libgnss \
-    libgnsspps \
     libcurl
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
-    $(LOCAL_PATH)/gps/etc/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf \
-    $(LOCAL_PATH)/gps/etc/izat.conf:$(TARGET_COPY_OUT_VENDOR)/etc/izat.conf \
-    $(LOCAL_PATH)/gps/etc/lowi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/lowi.conf \
-    $(LOCAL_PATH)/gps/etc/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
-    $(LOCAL_PATH)/gps/etc/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf
+    $(LOCAL_PATH)/configs/gps/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf \
+    $(LOCAL_PATH)/configs/gps/gps_debug.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/gps_debug.conf
 
 # Healthd
 PRODUCT_PACKAGES += \
@@ -322,12 +314,17 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.2 \
+    android.hardware.radio@1.4 \
     android.hardware.radio.config@1.0 \
     android.hardware.secure_element@1.0 \
     libcnefeatureconfig \
     librmnetctl \
     libprotobuf-cpp-full \
-    libxml2
+    libxml2 \
+    qti-telephony-hidl-wrapper \
+    qti_telephony_hidl_wrapper.xml \
+    qti-telephony-utils \
+    qti_telephony_utils.xml
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
@@ -347,7 +344,9 @@ PRODUCT_COPY_FILES += \
 # Telephony
 PRODUCT_PACKAGES += \
     ims-ext-common_system \
-    telephony-ext
+    telephony-ext \
+    ims-ext-common \
+    ims_ext_common.xml
 
 PRODUCT_BOOT_JARS += \
     ims-ext-common_system \
