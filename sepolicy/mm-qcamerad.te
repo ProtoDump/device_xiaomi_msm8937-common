@@ -1,11 +1,13 @@
 typeattribute mm-qcamerad binder_in_vendor_violators;
 typeattribute mm-qcamerad socket_between_core_and_vendor_violators;
 typeattribute mm-qcamerad data_between_core_and_vendor_violators;
+typeattribute mm-qcamerad vendor_executes_system_violators;
 
 allow mm-qcamerad camera_data_file:dir w_dir_perms;
 allow mm-qcamerad camera_data_file:file create_file_perms;
 allow mm-qcamerad camera_data_file:sock_file { create unlink };
 allow mm-qcamerad system_server:unix_stream_socket rw_socket_perms;
+allow mm-qcamerad system_file:file { r_file_perms };
 
 allow mm-qcamerad sensorservice_service:service_manager find;
 

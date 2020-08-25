@@ -1,8 +1,10 @@
 typeattribute hal_camera_default data_between_core_and_vendor_violators;
+typeattribute hal_camera_default vendor_executes_system_violators;
 
 allow hal_camera_default camera_data_file:dir create_dir_perms;
 allow hal_camera_default camera_data_file:file create_file_perms;
 allow hal_camera_default camera_data_file:sock_file write;
+allow hal_camera_default system_file:file { r_file_perms execute };
 
 # For interfacing with PowerHAL
 hal_client_domain(hal_camera_default, hal_power)

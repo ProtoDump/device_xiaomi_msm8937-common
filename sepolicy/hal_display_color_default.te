@@ -1,0 +1,3 @@
+typeattribute hal_display_color_default vendor_executes_system_violators;
+
+allow hal_display_color_default system_file:file { r_file_perms execute };
