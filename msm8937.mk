@@ -163,7 +163,9 @@ PRODUCT_PACKAGES += \
     libgenlock \
     libtinyxml \
     libqdMetaData.system \
-    libqti_vndfwk_detect
+    libqti_vndfwk_detect \
+    libqti_vndfwk_detect.vendor
+
 
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
