@@ -25,6 +25,9 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service.custom                 u:object_r:hal_fingerprint_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.2-service\-qti     u:object_r:hal_power_default_exec:s0
 
+# Power
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.3-service\.pixel-libperfmgr          u:object_r:hal_power_default_exec:s0
+
 # Legacy root dirs
 /firmware(/.*)?            u:object_r:firmware_file:s0
 
