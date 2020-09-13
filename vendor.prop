@@ -83,9 +83,6 @@ drm.service.enabled=true
 # Fingerprint
 persist.qfp=false
 
-# FM
-ro.fm.transmitter=false
-
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 
