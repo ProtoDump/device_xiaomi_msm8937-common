@@ -53,23 +53,14 @@ function 8917_sched_dcvs_eas()
 
 function 8937_sched_dcvs_eas()
 {
-    # enable governor for perf cluster
-    echo 1 > /sys/devices/system/cpu/cpu0/online
+    # configure governor settings for little cluster
     echo "schedutil" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/rate_limit_us
-    #set the hispeed_freq
-    echo 1094400 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq
-    #default value for hispeed_load is 90, for 8937 it should be 85
-    echo 85 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_load
-    ## enable governor for power cluster
-    echo 1 > /sys/devices/system/cpu/cpu4/online
-    echo "schedutil" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-    echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/rate_limit_us
-    #set the hispeed_freq
-    echo 768000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq
-    #default value for hispeed_load is 90, for 8937 it should be 85
-    echo 85 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_load
-
+    echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+    echo 500 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
+    # configure governor settings for big cluster
+    echo "schedutil" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+    echo 500 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
 }
 
 function configure_automotive_sku_parameters() {
@@ -2455,13 +2446,6 @@ case "$target" in
                         start_hbtp
                         ;;
                   esac
-
-                # Apply Scheduler and Governor settings for 8937/8940
-
-                # HMP scheduler settings
-                echo 3 > /proc/sys/kernel/sched_window_stats_policy
-                echo 3 > /proc/sys/kernel/sched_ravg_hist_size
-                echo 20000000 > /proc/sys/kernel/sched_ravg_window
 
                 #disable sched_boost in 8937
                 echo 0 > /proc/sys/kernel/sched_boost
