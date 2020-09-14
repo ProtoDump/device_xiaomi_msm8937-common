@@ -410,6 +410,10 @@ vendor/lib64/libfastcrc.so
 vendor/lib64/libstreamparser.so
 vendor/lib64/libvideoutils.so
 
+# Perf - LA.UM.8.6.2.r1-08400-89xx.0
+vendor/lib/libqti-perfd-client.so
+vendor/lib64/libqti-perfd-client.so
+
 # Peripheral - LA.UM.8.6.2.r1-08400-89xx.0
 vendor/bin/pm-proxy
 vendor/bin/pm-service
