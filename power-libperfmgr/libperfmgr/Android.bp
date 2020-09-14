@@ -15,7 +15,7 @@
 //
 
 cc_defaults {
-    name: "libperfmgr_defaults",
+    name: "libperfmgr_defaults-device",
     local_include_dirs: ["include"],
     shared_libs: [
         "libbase",
@@ -41,9 +41,9 @@ cc_defaults {
 }
 
 cc_library {
-    name: "libperfmgr",
+    name: "libperfmgr-device",
     vendor_available: true,
-    defaults: ["libperfmgr_defaults"],
+    defaults: ["libperfmgr_defaults-device"],
     export_include_dirs: ["include"],
     srcs: [
         "RequestGroup.cc",
@@ -56,8 +56,8 @@ cc_library {
 }
 
 cc_test {
-    name: "libperfmgr_test",
-    defaults: ["libperfmgr_defaults"],
+    name: "libperfmgr_test-device",
+    defaults: ["libperfmgr_defaults-device"],
     static_libs: ["libperfmgr"],
     srcs: [
         "tests/RequestGroupTest.cc",
@@ -69,8 +69,8 @@ cc_test {
 }
 
 cc_binary {
-    name: "perfmgr_config_verifier",
-    defaults: ["libperfmgr_defaults"],
+    name: "perfmgr_config_verifie-device",
+    defaults: ["libperfmgr_defaults-device"],
     static_libs: ["libperfmgr"],
     srcs: [
         "tools/ConfigVerifier.cc",
