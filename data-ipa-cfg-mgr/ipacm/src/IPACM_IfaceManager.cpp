@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2019, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -110,6 +110,14 @@ void IPACM_IfaceManager::event_callback(ipa_cm_event_id event, void *param)
 				IPACMERR("IPA_LINK_UP_EVENT: not supported iface id: %d\n", evt_data->if_index);
 				break;
 			}
+#ifdef FEATURE_VLAN_BACKHAUL
+			/* Ignore non-LTE backhaul*/
+			if (strstr(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name, VETH_NETDEV)) {
+				IPACMDBG("Ignoring link up for %s\n",
+					IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name)
+				break;
+			}
+#endif
 			/* LTE-backhaul */
 			if(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].if_cat == EMBMS_IF)
 			{
@@ -135,10 +143,16 @@ void IPACM_IfaceManager::event_callback(ipa_cm_event_id event, void *param)
 			/* check if it's WAN_IF */
 			if(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].if_cat == WAN_IF)
 			{
-				/* usb-backhaul using sta_mode ECM_WAN*/
-				IPACMDBG_H("WAN-usb (%s) link up, iface: %d: \n", IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name, evt_data->if_index);
+				/* ETH/usb-backhaul using sta_mode ECM_WAN*/
+				IPACMDBG_H("WAN-(%s) link up, iface: %d: \n", IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name, evt_data->if_index);
 				ifmgr_data.if_index = evt_data->if_index;
-				ifmgr_data.if_type = ECM_WAN;
+#ifdef FEATURE_VLAN_BACKHAUL
+				if (strncmp(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name,
+						VETH_NETDEV, IPA_IFACE_NAME_LEN) == 0)
+					ifmgr_data.if_type = ETH_WAN;
+				else
+#endif
+					ifmgr_data.if_type = ECM_WAN;
 				create_iface_instance(&ifmgr_data);
 			}
 			else
@@ -420,6 +434,7 @@ int IPACM_IfaceManager::create_iface_instance(ipacm_ifacemgr_data *param)
 #ifdef FEATURE_IPACM_HAL
 				IPACM_EvtDispatcher::registr(IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE, wl);
 #endif
+				IPACM_EvtDispatcher::registr(IPA_WIGIG_CLIENT_ADD_EVENT, wl);
 				/* IPA_LAN_DELETE_SELF should be always last */
 				IPACM_EvtDispatcher::registr(IPA_LAN_DELETE_SELF, wl);
 				IPACMDBG_H("ipa_WLAN (%s):ipa_index (%d) instance open/registr ok\n", wl->dev_name, wl->ipa_if_num);
@@ -483,6 +498,7 @@ int IPACM_IfaceManager::create_iface_instance(ipacm_ifacemgr_data *param)
 					}
 					else
 					{
+						IPACM_EvtDispatcher::registr(IPA_COALESCE_NOTICE, w);
 						IPACM_EvtDispatcher::registr(IPA_LINK_DOWN_EVENT, w);
 					}
 

@@ -54,6 +54,11 @@
 			   <WlanMode>full</WlanMode>
 			</Iface>
 			<Iface>
+			   <Name>wigig0</Name>
+			   <Category>UNKNOWN</Category>
+			   <WlanMode>full</WlanMode>
+			</Iface>
+			<Iface>
 			   <Name>wlan0</Name>
 			   <Category>UNKNOWN</Category>
 			   <WlanMode>full</WlanMode>
@@ -78,9 +83,14 @@
 			   <Category>ODU</Category>
 			</Iface>
 			<Iface>
+			   <Name>VETH0</Name>
+			   <Category>WAN</Category>
+			   <Mode>ROUTER</Mode>
+			</Iface>
+			<Iface>
 			   <Name>bridge0</Name>
 			   <Category>VIRTUAL</Category>
-		    </Iface>
+			</Iface>
 		</IPACMIface>
 		<IPPassthroughFlag>
 			<IPPassthroughMode>0</IPPassthroughMode>
@@ -171,5 +181,23 @@
 		<IPACMNAT>		
  	        <MaxNatEntries>500</MaxNatEntries>
 		</IPACMNAT>
-		</IPACM>
+		<IPACMQoS>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+		</IPACMQoS>
+	</IPACM>
 </system>

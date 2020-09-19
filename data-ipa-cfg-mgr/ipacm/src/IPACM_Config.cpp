@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2017, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2019, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -106,8 +106,7 @@ const char *ipacm_event_name[] = {
 	__stringify(IPA_ETH_BRIDGE_CLIENT_ADD),                /* ipacm_event_eth_bridge*/
 	__stringify(IPA_ETH_BRIDGE_CLIENT_DEL),                /* ipacm_event_eth_bridge*/
 	__stringify(IPA_ETH_BRIDGE_WLAN_SCC_MCC_SWITCH),       /* ipacm_event_eth_bridge*/
-	__stringify(IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE),       /* ipacm_event_iface*/
-	__stringify(IPA_LAN_DELETE_SELF),                      /* ipacm_event_data_fid */
+	__stringify(IPA_SSR_NOTICE)			       /* NULL*/
 #ifdef FEATURE_L2TP
 	__stringify(IPA_ADD_VLAN_IFACE),                       /* ipa_ioc_vlan_iface_info */
 	__stringify(IPA_DEL_VLAN_IFACE),                       /* ipa_ioc_vlan_iface_info */
@@ -116,6 +115,10 @@ const char *ipacm_event_name[] = {
 	__stringify(IPA_VLAN_CLIENT_INFO),                     /* ipacm_event_data_all */
 	__stringify(IPA_VLAN_IFACE_INFO),                      /* ipacm_event_data_all */
 #endif
+	__stringify(IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE),       /* ipacm_event_iface*/
+	__stringify(IPA_LAN_DELETE_SELF),                      /* ipacm_event_data_fid */
+	__stringify(IPA_WIGIG_CLIENT_ADD_EVENT),               /* ipacm_event_data_mac_ep */
+	__stringify(IPA_WIGIG_FST_SWITCH),                     /* ipacm_event_data_fst */
 	__stringify(IPACM_EVENT_MAX),
 };
 
@@ -140,6 +143,10 @@ IPACM_Config::IPACM_Config()
 	ipa_bridge_enable = false;
 	isMCC_Mode = false;
 	ipa_max_valid_rm_entry = 0;
+	/* IPA_HW_FNR_STATS */
+	hw_fnr_stats_support = false;
+	hw_counter_offset = 0;
+	sw_counter_offset = 0;
 
 	memset(&rt_tbl_default_v4, 0, sizeof(rt_tbl_default_v4));
 	memset(&rt_tbl_lan_v4, 0, sizeof(rt_tbl_lan_v4));
@@ -158,7 +165,9 @@ IPACM_Config::IPACM_Config()
 	memset(flt_rule_count_v4, 0, IPA_CLIENT_MAX*sizeof(int));
 	memset(flt_rule_count_v6, 0, IPA_CLIENT_MAX*sizeof(int));
 	memset(bridge_mac, 0, IPA_MAC_ADDR_SIZE*sizeof(uint8_t));
-
+#ifdef FEATURE_VLAN_BACKHAUL
+	memset(vlan_devices, 0, IPA_VLAN_IF_MAX*sizeof(bool));
+#endif
 	IPACMDBG_H(" create IPACM_Config constructor\n");
 	return;
 }
@@ -284,6 +293,16 @@ int IPACM_Config::Init(void)
 		IPACMDBG_H("IPACM_Config::ipacm_alg[%d] = %d, port=%d\n", i, alg_table[i].protocol, alg_table[i].port);
 	}
 
+#ifdef FEATURE_VLAN_BACKHAUL
+	qos_config.num_mappings = cfg->qos_config.num_mappings;
+	for (i = 0 ; i < IPA_MAX_QOS_ENTRIES; ++i)
+	{
+		qos_config.vlan_dscp_map[i].vlan_id = cfg->qos_config.vlan_dscp_map[i].vlan_id;
+		qos_config.vlan_dscp_map[i].dscp = cfg->qos_config.vlan_dscp_map[i].dscp;
+		IPACMDBG_H("IPACM_Config::ipacm_qos[%d] vlanid = %d, dscp=%d\n",
+			i, qos_config.vlan_dscp_map[i].vlan_id, qos_config.vlan_dscp_map[i].dscp);
+	}
+#endif
 	ipa_nat_max_entries = cfg->nat_max_entries;
 	IPACMDBG_H("Nat Maximum Entries %d\n", ipa_nat_max_entries);
 
@@ -898,3 +917,26 @@ enum ipa_hw_type IPACM_Config::GetIPAVer(bool get)
 	IPACMDBG_H("IPA version is %d.\n", ver);
 	return ver;
 }
+
+#ifdef FEATURE_VLAN_BACKHAUL
+void IPACM_Config::set_iface_vlan_mode(enum ipa_vlan_ifaces dev, bool state)
+{
+	if (vlan_devices[dev] == state)
+	{
+		IPACMDBG_H("vlan iface (eth 0 /rndis 1/ecm 2) %d already in state : %d\n", dev, state);
+	}
+	vlan_devices[dev] = state;
+}
+
+bool IPACM_Config::iface_in_vlan_mode(const char *phys_iface_name)
+{
+	if(phys_iface_name && strstr(phys_iface_name, VETH_NETDEV))
+	{
+		IPACMDBG("eth vlan mode %d\n", vlan_devices[IPA_VLAN_IF_ETH]);
+		return vlan_devices[IPA_VLAN_IF_ETH];
+	}
+	IPACMDBG("iface did not match any known ifaces\n");
+	return false;
+}
+#endif
+

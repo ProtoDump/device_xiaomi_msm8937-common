@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2020, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -35,6 +35,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "IPACM_EvtDispatcher.h"
 #include "IPACM_Iface.h"
 #include "IPACM_Wan.h"
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 IPACM_ConntrackListener::IPACM_ConntrackListener()
 {
@@ -43,11 +44,14 @@ IPACM_ConntrackListener::IPACM_ConntrackListener()
 	 isNatThreadStart = false;
 	 isCTReg = false;
 	 WanUp = false;
+	 isReadCTDone = false;
+	 isProcessCTDone = false;
 	 nat_inst = NatApp::GetInstance();
 
 	 NatIfaceCnt = 0;
 	 StaClntCnt = 0;
 	 pNatIfaces = NULL;
+	 ct_entries = NULL;
 	 pConfig = IPACM_Config::GetInstance();;
 
 	 memset(nat_iface_ipv4_addr, 0, sizeof(nat_iface_ipv4_addr));
@@ -97,6 +101,10 @@ void IPACM_ConntrackListener::event_callback(ipa_cm_event_id evt,
 			IPACMDBG_H("Received IPA_HANDLE_WAN_UP event\n");
 			CreateConnTrackThreads();
 			TriggerWANUp(data);
+			if(isReadCTDone && !isProcessCTDone)
+			{
+				processConntrack();
+			}
 			break;
 
 	 case IPA_HANDLE_WAN_DOWN:
@@ -230,7 +238,7 @@ void IPACM_ConntrackListener::HandleNonNatIPAddr(
 	bool NatIface = false;
 	int cnt, ret;
 
-	if (isStaMode)
+	if (backhaul_mode != Q6_WAN)
 	{
 		IPACMDBG("In STA mode, don't add dummy rules for non nat ifaces\n");
 		return;
@@ -345,10 +353,13 @@ void IPACM_ConntrackListener::HandleNeighIpAddrDelEvt(
 void IPACM_ConntrackListener::TriggerWANUp(void *in_param)
 {
 	 ipacm_event_iface_up *wanup_data = (ipacm_event_iface_up *)in_param;
+	 uint8_t mux_id;
 
 	 IPACMDBG_H("Recevied below information during wanup,\n");
-	 IPACMDBG_H("if_name:%s, ipv4_address:0x%x\n",
-						wanup_data->ifname, wanup_data->ipv4_addr);
+	 IPACMDBG_H("if_name:%s, ipv4_address:0x%x mux_id:%d, xlat_mux_id:%d\n",
+						wanup_data->ifname, wanup_data->ipv4_addr,
+						wanup_data->mux_id,
+						wanup_data->xlat_mux_id);
 
 	 if(wanup_data->ipv4_addr == 0)
 	 {
@@ -365,15 +376,19 @@ void IPACM_ConntrackListener::TriggerWANUp(void *in_param)
 	 }
 
 	 WanUp = true;
-	 isStaMode = wanup_data->is_sta;
-	 IPACMDBG("isStaMode: %d\n", isStaMode);
+	 backhaul_mode = wanup_data->backhaul_type;
+	 IPACMDBG("backhaul_mode: %d\n", backhaul_mode);
 
 	 wan_ipaddr = wanup_data->ipv4_addr;
 	 memcpy(wan_ifname, wanup_data->ifname, sizeof(wan_ifname));
 
 	 if(nat_inst != NULL)
 	 {
-		 nat_inst->AddTable(wanup_data->ipv4_addr, wanup_data->mux_id);
+		 if (wanup_data->mux_id == 0)
+		   mux_id = wanup_data->xlat_mux_id;
+		 else
+		   mux_id = wanup_data->mux_id;
+		 nat_inst->AddTable(wanup_data->ipv4_addr, mux_id);
 	 }
 
 	 IPACMDBG("creating nat threads\n");
@@ -723,7 +738,7 @@ bool IPACM_ConntrackListener::AddIface(
 		}
 	}
 
-	if (!isStaMode)
+	if (backhaul_mode == Q6_WAN)
 	{
 		/* check whether non nat iface or not, on Non Nat iface
 		   add dummy rule by copying public ip to private ip */
@@ -992,7 +1007,7 @@ void IPACM_ConntrackListener::CheckSTAClient(
 
 	/* Check whether target is in STA client list or not
       if not ignore the connection */
-	 if(!isStaMode || (StaClntCnt == 0))
+	 if((backhaul_mode == Q6_WAN) || (StaClntCnt == 0))
 	 {
 		return;
 	 }
@@ -1107,7 +1122,7 @@ void IPACM_ConntrackListener::ProcessTCPorUDPMsg(
 	}
 	else
 	{
-		if (isStaMode)
+		if (backhaul_mode != Q6_WAN)
 		{
 			IPACMDBG("In STA mode, ignore connections destinated to STA interface\n");
 			goto IGNORE;
@@ -1193,4 +1208,170 @@ void IPACM_ConntrackListener::HandleSTAClientDelEvt(uint32_t clnt_ip_addr)
 
 	 nat_inst->FlushTempEntries(clnt_ip_addr, false);
    return;
+}
+
+bool isLocalHostAddr(uint32_t src_ip_addr, uint32_t dst_ip_addr) {
+
+	src_ip_addr = ntohl(src_ip_addr);
+	dst_ip_addr = ntohl(dst_ip_addr);
+	if ((src_ip_addr & LOOPBACK_MASK) == LOOPBACK_ADDR || (dst_ip_addr & LOOPBACK_MASK) == LOOPBACK_ADDR) /* (loopback) */
+		return true;
+	return false;
+}
+
+void IPACM_ConntrackListener::readConntrack() {
+
+	IPACM_ConntrackClient *pClient;
+	int len_fil = 0, recv_bytes = -1, index = 0, len =0;
+	char buffer[CT_ENTRIES_BUFFER_SIZE];
+	char *buf = &buffer[0];
+	struct nf_conntrack *ct;
+	struct nlmsghdr *nl_header;
+	static struct sockaddr_nl nlAddr = {
+		.nl_family = AF_NETLINK
+	};
+	unsigned int addr_len = sizeof(nlAddr);
+
+	pClient = IPACM_ConntrackClient::GetInstance();
+	if(pClient == NULL)
+	{
+		IPACMERR("unable to get conntrack client instance\n");
+		return;
+	}
+
+	len = MAX_CONNTRACK_ENTRIES * sizeof(struct nf_conntrack **);
+
+	ct_entries = (struct nf_conntrack **) malloc(len);
+	if(ct_entries == NULL)
+	{
+		IPACMERR("unable to allocate ct_entries memory \n");
+		return;
+	}
+	memset(ct_entries, 0, len);
+
+	if( pClient->fd_tcp < 0)
+	{
+		IPACMDBG_H("Invalid fd %d \n",pClient->fd_tcp);
+		free(ct_entries);
+		return;
+	}
+
+	IPACMDBG_H("receiving conntrack entries started.\n");
+	while(len_fil < sizeof(buffer) && index <  MAX_CONNTRACK_ENTRIES)
+	{
+	 	recv_bytes = recvfrom( pClient->fd_tcp, buf, sizeof(buffer)-len_fil, 0, (struct sockaddr *)&nlAddr, (socklen_t *)&addr_len);
+		if(recv_bytes < 0)
+		{
+			IPACMDBG_H("error in receiving conntrack entries %d%s",errno, strerror(errno));
+			break;
+		}
+		else
+		{
+			nl_header = (struct nlmsghdr *)buf;
+
+			if (NLMSG_OK(nl_header, recv_bytes) == 0 || nl_header->nlmsg_type == NLMSG_ERROR)
+			{
+				IPACMDBG_H("recv_bytes is %d\n",recv_bytes);
+				break;
+			}
+			ct = nfct_new();
+			if (ct != NULL)
+			{
+				int parseResult =  nfct_parse_conntrack((nf_conntrack_msg_type) NFCT_T_ALL,nl_header, ct);
+				if(parseResult != NFCT_T_ERROR)
+				{
+					ct_entries[index++] = ct;
+				}
+				else
+				{
+					IPACMDBG_H("error in parsing  %d%s \n", errno, strerror(errno));
+				}
+			}
+			else
+			{
+				IPACMDBG_H("ct allocation failed");
+				continue;
+			}
+
+			if((nl_header->nlmsg_type & NLM_F_MULTI) == 0)
+			{
+				break;
+			}
+			len_fil += recv_bytes;
+			buf = buf + recv_bytes;
+		}
+	}
+	isReadCTDone = true;
+	IPACMDBG_H("receiving conntrack entries ended.\n");
+	if(isWanUp() && !isProcessCTDone)
+	{
+		IPACMDBG_H("wan is up, process ct entries \n");
+		processConntrack();
+	}
+
+	return ;
+}
+
+void IPACM_ConntrackListener::processConntrack() {
+
+	uint8_t ip_type;
+	int index = 0;
+	ipacm_ct_evt_data *ct_data;
+	enum nf_conntrack_msg_type type = NFCT_T_ALL;
+	IPACMDBG_H("process conntrack started \n");
+	if(ct_entries != NULL)
+	{
+		while(ct_entries[index] != NULL)
+		{
+			ip_type = nfct_get_attr_u8(ct_entries[index], ATTR_REPL_L3PROTO);
+			if(!(AF_INET6 == ip_type) && isLocalHostAddr(nfct_get_attr_u32(ct_entries[index], ATTR_ORIG_IPV4_SRC),
+					nfct_get_attr_u32(ct_entries[index], ATTR_ORIG_IPV4_DST)))
+			{
+				IPACMDBG_H(" loopback entry \n");
+				goto IGNORE;
+			}
+
+#ifndef CT_OPT
+			if(AF_INET6 == ip_type)
+			{
+				IPACMDBG("Ignoring ipv6(%d) connections\n", ip_type);
+				goto IGNORE;
+			}
+#endif
+
+			ct_data = (ipacm_ct_evt_data *)malloc(sizeof(ipacm_ct_evt_data));
+			if(ct_data == NULL)
+			{
+				IPACMERR("unable to allocate memory \n");
+				goto IGNORE;
+			}
+
+			ct_data->ct = ct_entries[index];
+			ct_data->type = type;
+
+#ifdef CT_OPT
+			if(AF_INET6 == ip_type)
+			{
+				ProcessCTV6Message(ct_data);
+			}
+#else
+				ProcessCTMessage(ct_data);
+#endif
+		index++;
+		free(ct_data);
+		continue;
+IGNORE:
+		nfct_destroy(ct_entries[index]);
+		index++;
+		}
+	}
+	else
+	{
+		IPACMDBG_H("ct entry is null\n");
+		return ;
+	}
+	isProcessCTDone = true;
+	free(ct_entries);
+	IPACMDBG_H("process conntrack ended \n");
+	return;
 }

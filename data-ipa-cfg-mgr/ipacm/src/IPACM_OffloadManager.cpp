@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
+Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -51,6 +51,7 @@ const char *IPACM_OffloadManager::DEVICE_NAME = "/dev/wwan_ioctl";
 
 /* NatApp class Implementation */
 IPACM_OffloadManager *IPACM_OffloadManager::pInstance = NULL;
+int IPACM_OffloadManager::num_offload_v4_tethered_iface = 0;
 
 IPACM_OffloadManager::IPACM_OffloadManager()
 {
@@ -237,44 +238,49 @@ RET IPACM_OffloadManager::addDownstream(const char * downstream_name, const Pref
 		/* copy to the cache */
 		for(int i = 0; i < MAX_EVENT_CACHE ;i++)
 		{
-			if(event_cache[latest_cache_index].valid == false)
+			if (latest_cache_index >= 0)
 			{
-				//do the copy
-				event_cache[latest_cache_index].valid = true;
-				event_cache[latest_cache_index].event = IPA_DOWNSTREAM_ADD;
-				memcpy(event_cache[latest_cache_index].dev_name, downstream_name, sizeof(event_cache[latest_cache_index].dev_name));
-				memcpy(&event_cache[latest_cache_index].prefix_cache, &prefix, sizeof(event_cache[latest_cache_index].prefix_cache));
-				if (prefix.fam == V4) {
-					IPACMDBG_H("cache event(%d) subnet info v4Addr (%x) v4Mask (%x) dev(%s) on entry (%d)\n",
-						event_cache[latest_cache_index].event,
-						event_cache[latest_cache_index].prefix_cache.v4Addr,
-						event_cache[latest_cache_index].prefix_cache.v4Mask,
-						event_cache[latest_cache_index].dev_name,
-						latest_cache_index);
-				} else {
-					IPACMDBG_H("cache event (%d) v6Addr: %08x:%08x:%08x:%08x \n",
-						event_cache[latest_cache_index].event,
-						event_cache[latest_cache_index].prefix_cache.v6Addr[0],
-						event_cache[latest_cache_index].prefix_cache.v6Addr[1],
-						event_cache[latest_cache_index].prefix_cache.v6Addr[2],
-						event_cache[latest_cache_index].prefix_cache.v6Addr[3]);
-					IPACMDBG_H("subnet v6Mask: %08x:%08x:%08x:%08x dev(%s) on entry(%d), \n",
-						event_cache[latest_cache_index].prefix_cache.v6Mask[0],
-						event_cache[latest_cache_index].prefix_cache.v6Mask[1],
-						event_cache[latest_cache_index].prefix_cache.v6Mask[2],
-						event_cache[latest_cache_index].prefix_cache.v6Mask[3],
-						event_cache[latest_cache_index].dev_name,
-						latest_cache_index);
+				if(event_cache[latest_cache_index].valid == false)
+				{
+					//do the copy
+					event_cache[latest_cache_index].valid = true;
+					event_cache[latest_cache_index].event = IPA_DOWNSTREAM_ADD;
+					memcpy(event_cache[latest_cache_index].dev_name, downstream_name,
+						sizeof(event_cache[latest_cache_index].dev_name));
+					memcpy(&event_cache[latest_cache_index].prefix_cache, &prefix,
+						sizeof(event_cache[latest_cache_index].prefix_cache));
+					if (prefix.fam == V4) {
+						IPACMDBG_H("cache event(%d) subnet info v4Addr (%x) v4Mask (%x) dev(%s) on entry (%d)\n",
+							event_cache[latest_cache_index].event,
+							event_cache[latest_cache_index].prefix_cache.v4Addr,
+							event_cache[latest_cache_index].prefix_cache.v4Mask,
+							event_cache[latest_cache_index].dev_name,
+							latest_cache_index);
+					} else {
+						IPACMDBG_H("cache event (%d) v6Addr: %08x:%08x:%08x:%08x \n",
+							event_cache[latest_cache_index].event,
+							event_cache[latest_cache_index].prefix_cache.v6Addr[0],
+							event_cache[latest_cache_index].prefix_cache.v6Addr[1],
+							event_cache[latest_cache_index].prefix_cache.v6Addr[2],
+							event_cache[latest_cache_index].prefix_cache.v6Addr[3]);
+						IPACMDBG_H("subnet v6Mask: %08x:%08x:%08x:%08x dev(%s) on entry(%d), \n",
+							event_cache[latest_cache_index].prefix_cache.v6Mask[0],
+							event_cache[latest_cache_index].prefix_cache.v6Mask[1],
+							event_cache[latest_cache_index].prefix_cache.v6Mask[2],
+							event_cache[latest_cache_index].prefix_cache.v6Mask[3],
+							event_cache[latest_cache_index].dev_name,
+							latest_cache_index);
+					}
+					latest_cache_index = (latest_cache_index + 1)% MAX_EVENT_CACHE;
+					break;
 				}
 				latest_cache_index = (latest_cache_index + 1)% MAX_EVENT_CACHE;
-				break;
 			}
-			latest_cache_index = (latest_cache_index + 1)% MAX_EVENT_CACHE;
 			if(i == MAX_EVENT_CACHE - 1)
 			{
 				IPACMDBG_H(" run out of event cache (%d)\n", i);
-		return FAIL_HARDWARE;
-	}
+				return FAIL_HARDWARE;
+			}
 		}
 
 		return SUCCESS;
@@ -412,37 +418,43 @@ RET IPACM_OffloadManager::setUpstream(const char *upstream_name, const Prefix& g
 			/* copy to the cache */
 			for(int i = 0; i < MAX_EVENT_CACHE ;i++)
 			{
-				if(event_cache[latest_cache_index].valid == false)
+				if (latest_cache_index >= 0)
 				{
-					//do the copy
-					event_cache[latest_cache_index].valid = true;
-					event_cache[latest_cache_index].event = IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT;
-					memcpy(event_cache[latest_cache_index].dev_name, upstream_name, sizeof(event_cache[latest_cache_index].dev_name));
-					memcpy(&event_cache[latest_cache_index].prefix_cache, &gw_addr_v4, sizeof(event_cache[latest_cache_index].prefix_cache));
-					memcpy(&event_cache[latest_cache_index].prefix_cache_v6, &gw_addr_v6, sizeof(event_cache[latest_cache_index].prefix_cache_v6));
-					if (gw_addr_v4.fam == V4) {
-						IPACMDBG_H("cache event(%d) ipv4 gateway: (%x) dev(%s) on entry (%d)\n",
-							event_cache[latest_cache_index].event,
-							event_cache[latest_cache_index].prefix_cache.v4Addr,
-							event_cache[latest_cache_index].dev_name,
-							latest_cache_index);
-		}
+					if(event_cache[latest_cache_index].valid == false)
+					{
+						//do the copy
+						event_cache[latest_cache_index].valid = true;
+						event_cache[latest_cache_index].event = IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT;
+						memcpy(event_cache[latest_cache_index].dev_name, upstream_name,
+							sizeof(event_cache[latest_cache_index].dev_name));
+						memcpy(&event_cache[latest_cache_index].prefix_cache, &gw_addr_v4,
+							sizeof(event_cache[latest_cache_index].prefix_cache));
+						memcpy(&event_cache[latest_cache_index].prefix_cache_v6, &gw_addr_v6,
+							sizeof(event_cache[latest_cache_index].prefix_cache_v6));
+						if (gw_addr_v4.fam == V4) {
+							IPACMDBG_H("cache event(%d) ipv4 gateway: (%x) dev(%s) on entry (%d)\n",
+								event_cache[latest_cache_index].event,
+								event_cache[latest_cache_index].prefix_cache.v4Addr,
+								event_cache[latest_cache_index].dev_name,
+								latest_cache_index);
+						}
 
-					if (gw_addr_v6.fam == V6)
-		{
-						IPACMDBG_H("cache event (%d) ipv6 gateway: %08x:%08x:%08x:%08x dev(%s) on entry(%d)\n",
-							event_cache[latest_cache_index].event,
-							event_cache[latest_cache_index].prefix_cache_v6.v6Addr[0],
-							event_cache[latest_cache_index].prefix_cache_v6.v6Addr[1],
-							event_cache[latest_cache_index].prefix_cache_v6.v6Addr[2],
-							event_cache[latest_cache_index].prefix_cache_v6.v6Addr[3],
-							event_cache[latest_cache_index].dev_name,
-							latest_cache_index);
+						if (gw_addr_v6.fam == V6)
+						{
+							IPACMDBG_H("cache event (%d) ipv6 gateway: %08x:%08x:%08x:%08x dev(%s) on entry(%d)\n",
+								event_cache[latest_cache_index].event,
+								event_cache[latest_cache_index].prefix_cache_v6.v6Addr[0],
+								event_cache[latest_cache_index].prefix_cache_v6.v6Addr[1],
+								event_cache[latest_cache_index].prefix_cache_v6.v6Addr[2],
+								event_cache[latest_cache_index].prefix_cache_v6.v6Addr[3],
+								event_cache[latest_cache_index].dev_name,
+								latest_cache_index);
+						}
+						latest_cache_index = (latest_cache_index + 1)% MAX_EVENT_CACHE;
+						break;
 					}
 					latest_cache_index = (latest_cache_index + 1)% MAX_EVENT_CACHE;
-					break;
 				}
-				latest_cache_index = (latest_cache_index + 1)% MAX_EVENT_CACHE;
 				if(i == MAX_EVENT_CACHE - 1)
 				{
 					IPACMDBG_H(" run out of event cache (%d) \n", i);
@@ -566,11 +578,13 @@ RET IPACM_OffloadManager::stopAllOffload()
 	memset(event_cache, 0, MAX_EVENT_CACHE*sizeof(framework_event_cache));
 	latest_cache_index = 0;
 	valid_ifaces.clear();
+	IPACM_OffloadManager::num_offload_v4_tethered_iface = 0;
 	return result;
 }
 
 RET IPACM_OffloadManager::setQuota(const char * upstream_name /* upstream */, uint64_t mb/* limit */)
 {
+#ifndef FEATURE_DISABLE_STATS
 	wan_ioctl_set_data_quota quota;
 	int fd = -1, rc = 0, err_type = 0;
 
@@ -590,7 +604,7 @@ RET IPACM_OffloadManager::setQuota(const char * upstream_name /* upstream */, ui
 		return FAIL_INPUT_CHECK;
 	}
 
-	IPACMDBG_H("SET_DATA_QUOTA %s %llu", quota.interface_name, (long long)mb);
+	IPACMDBG_H("SET_DATA_QUOTA %s %llu\n", quota.interface_name, (long long)mb);
 
 	rc = ioctl(fd, WAN_IOC_SET_DATA_QUOTA, &quota);
 
@@ -608,22 +622,26 @@ RET IPACM_OffloadManager::setQuota(const char * upstream_name /* upstream */, ui
 		}
 	}
 	close(fd);
+#else
+	IPACMDBG_H("upstream %s mb %lu ignored on APQ target\n", upstream_name, mb);
+#endif
 	return SUCCESS;
 }
 
 RET IPACM_OffloadManager::getStats(const char * upstream_name /* upstream */,
 		bool reset /* reset */, OffloadStatistics& offload_stats/* ret */)
 {
+#ifndef FEATURE_DISABLE_STATS
 	int fd = -1;
 	wan_ioctl_query_tether_stats_all stats;
 
 	if ((fd = open(DEVICE_NAME, O_RDWR)) < 0) {
-        IPACMERR("Failed opening %s.\n", DEVICE_NAME);
-        return FAIL_HARDWARE;
-    }
+		IPACMERR("Failed opening %s.\n", DEVICE_NAME);
+		return FAIL_HARDWARE;
+	}
 
-    memset(&stats, 0, sizeof(stats));
-    if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
+	memset(&stats, 0, sizeof(stats));
+	if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
 		IPACMERR("String truncation occurred on upstream\n");
 		close(fd);
 		return FAIL_INPUT_CHECK;
@@ -639,9 +657,14 @@ RET IPACM_OffloadManager::getStats(const char * upstream_name /* upstream */,
 	/* feedback to IPAHAL*/
 	offload_stats.tx = stats.tx_bytes;
 	offload_stats.rx = stats.rx_bytes;
-
-	IPACMDBG_H("send getStats tx:%llu rx:%llu \n", (long long)offload_stats.tx, (long long)offload_stats.rx);
 	close(fd);
+#else
+	//stub out getStats for APQ platform
+	IPACMDBG_H("upstream %s reset %d ignored on APQ platform\n", upstream_name, reset);
+	offload_stats.tx = 1;
+	offload_stats.rx = 1;
+#endif
+	IPACMDBG_H("send getStats tx:%llu rx:%llu \n", (long long)offload_stats.tx, (long long)offload_stats.rx);
 	return SUCCESS;
 }
 
@@ -729,16 +752,17 @@ int IPACM_OffloadManager::ipa_get_if_index(const char * if_name, int * if_index)
 
 int IPACM_OffloadManager::resetTetherStats(const char * upstream_name /* upstream */)
 {
+#ifndef FEATURE_DISABLE_STATS
 	int fd = -1;
 	wan_ioctl_reset_tether_stats stats;
 
 	if ((fd = open(DEVICE_NAME, O_RDWR)) < 0) {
-        IPACMERR("Failed opening %s.\n", DEVICE_NAME);
-        return FAIL_HARDWARE;
-    }
+		IPACMERR("Failed opening %s.\n", DEVICE_NAME);
+		return FAIL_HARDWARE;
+	}
 
-    memset(stats.upstreamIface, 0, IFNAMSIZ);
-    if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
+	memset(stats.upstreamIface, 0, IFNAMSIZ);
+	if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
 		IPACMERR("String truncation occurred on upstream\n");
 		close(fd);
 		return FAIL_INPUT_CHECK;
@@ -749,8 +773,9 @@ int IPACM_OffloadManager::resetTetherStats(const char * upstream_name /* upstrea
 		close(fd);
 		return FAIL_HARDWARE;
 	}
-	IPACMDBG_H("Reset Interface %s stats\n", upstream_name);
 	close(fd);
+#endif
+	IPACMDBG_H("Reset Interface %s stats\n", upstream_name);
 	return IPACM_SUCCESS;
 }
 
@@ -765,12 +790,14 @@ IPACM_OffloadManager* IPACM_OffloadManager::GetInstance()
 bool IPACM_OffloadManager::search_framwork_cache(char * interface_name)
 {
 	bool rel = false;
+	bool cache_need = false;
 
 	/* IPACM needs to kee old FDs, can't clear */
 	IPACMDBG_H("check netdev(%s)\n", interface_name);
 
 	for(int i = 0; i < MAX_EVENT_CACHE ;i++)
 	{
+		cache_need = false;
 		if(event_cache[i].valid == true)
 		{
 			//do the compare
@@ -780,14 +807,40 @@ bool IPACM_OffloadManager::search_framwork_cache(char * interface_name)
 			{
 				IPACMDBG_H("found netdev (%s) in entry (%d) with event (%d)\n", interface_name, i, event_cache[i].event);
 				/* post event again */
-				if (event_cache[i].event == IPA_DOWNSTREAM_ADD)
+				if (event_cache[i].event == IPA_DOWNSTREAM_ADD) {
+					/* check if downsteam netdev driver finished its configuration on IPA-HW for ipv4 and ipv6 */
+					if (event_cache[i].prefix_cache.fam == V4 && IPACM_Iface::ipacmcfg->CheckNatIfaces(event_cache[i].dev_name, IPA_IP_v4))
+						cache_need = true;
+					if (event_cache[i].prefix_cache.fam == V6 && IPACM_Iface::ipacmcfg->CheckNatIfaces(event_cache[i].dev_name, IPA_IP_v6))
+						cache_need = true;
+					if (cache_need) {
+						IPACMDBG_H("still need cache (%d), index (%d) ip-family (%d)\n", cache_need, i, event_cache[i].prefix_cache.fam);
+						break;
+					} else {
+						IPACMDBG_H("no need cache (%d), handling it event (%d)\n", cache_need, event_cache[i].event);
 					addDownstream(interface_name, event_cache[i].prefix_cache);
-				else if (event_cache[i].event == IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT)
+					}
+				} else if (event_cache[i].event == IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT) {
+					/* check if upstream netdev driver finished its configuration on IPA-HW for ipv4 and ipv6 */
+					if (event_cache[i].prefix_cache.fam == V4 && IPACM_Iface::ipacmcfg->CheckNatIfaces(event_cache[i].dev_name, IPA_IP_v4))
+						cache_need = true;
+					if (event_cache[i].prefix_cache_v6.fam == V6 && IPACM_Iface::ipacmcfg->CheckNatIfaces(event_cache[i].dev_name, IPA_IP_v6))
+						cache_need = true;
+					if (cache_need) {
+						IPACMDBG_H("still need cache (%d), index (%d)\n", cache_need, i);
+						break;
+					} else {
+						IPACMDBG_H("no need cache (%d), handling it event (%d)\n", cache_need, event_cache[i].event);
 					setUpstream(interface_name, event_cache[i].prefix_cache, event_cache[i].prefix_cache_v6);
-				else
-					IPACMERR("wrong event cached (%d)", event_cache[i].event);
+					}
+				} else {
+						IPACMERR("wrong event cached (%d) index (%d)\n", event_cache[i].event, i);
+				}
+
+				/* reset entry */
 				event_cache[i].valid = false;
 				rel = true;
+				IPACMDBG_H("reset entry (%d)", i);
 			}
 		}
 	}

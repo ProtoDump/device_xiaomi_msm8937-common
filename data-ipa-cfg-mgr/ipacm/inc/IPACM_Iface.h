@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2020, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -52,6 +52,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "IPACM_Config.h"
 #include "IPACM_Defs.h"
 #include <string.h>
+#include <linux/if_vlan.h>
+#include <linux/sockios.h>
+#include <map>
 
 /* current support 2 ipv6-address*/
 #define MAX_DEFAULT_v4_ROUTE_RULES  1
@@ -59,7 +62,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IPV4_DEFAULT_FILTERTING_RULES 3
 
 #ifdef FEATURE_IPA_ANDROID
-#define IPV6_DEFAULT_FILTERTING_RULES 8
+#define IPV6_DEFAULT_FILTERTING_RULES 5
 #else
 #define IPV6_DEFAULT_FILTERTING_RULES 4
 #endif
@@ -139,12 +142,21 @@ public:
 	static IPACM_Filtering m_filtering;
 	static IPACM_Header m_header;
 
+	void change_to_network_order(ipa_ip_type iptype, ipa_rule_attrib* attrib);
+
 	/* software routing enable */
-	virtual int handle_software_routing_enable(void);
+	virtual int handle_software_routing_enable(bool mhip);
 
 	/* software routing disable */
-	virtual int handle_software_routing_disable(void);
+	virtual int handle_software_routing_disable(bool mhip);
 	void delete_iface(void);
+
+	bool is_global_ipv6_addr(uint32_t* ipv6_addr);
+
+#ifdef FEATURE_VLAN_BACKHAUL
+	/* Query interface vlan id by given linux interface index */
+	int ipa_get_vlan_info(int if_index, int *vlan_id, char *iface_name);
+#endif
 
 private:
 
