@@ -58,7 +58,7 @@ cc_library {
 cc_test {
     name: "libperfmgr_test-device",
     defaults: ["libperfmgr_defaults-device"],
-    static_libs: ["libperfmgr"],
+    static_libs: ["//hardware/google/pixel:libperfmgr"],
     srcs: [
         "tests/RequestGroupTest.cc",
         "tests/FileNodeTest.cc",
@@ -71,7 +71,7 @@ cc_test {
 cc_binary {
     name: "perfmgr_config_verifie-device",
     defaults: ["libperfmgr_defaults-device"],
-    static_libs: ["libperfmgr"],
+    static_libs: ["//hardware/google/pixel:libperfmgr"],
     srcs: [
         "tools/ConfigVerifier.cc",
     ]
