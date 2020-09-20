@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power@1.3-service.pixel-libperfmgr"
+#define LOG_TAG "android.hardware.power@1.3-service.xiaomi-libperfmgr"
 
 #include <fcntl.h>
 #include <poll.h>
