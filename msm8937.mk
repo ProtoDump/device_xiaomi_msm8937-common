@@ -15,6 +15,10 @@
 # limitations under the License.
 #
 
+# Soong
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/google/pixel
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
