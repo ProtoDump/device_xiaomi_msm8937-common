@@ -566,7 +566,6 @@ vendor/radio/qcril_database/qcril.db
 # Radio - LA.UM.8.6.r1
 -product/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 product/etc/permissions/telephony_product_privapp-permissions-qti.xml
-product/framework/qti-telephony-common.jar
 vendor/bin/adpl
 vendor/etc/init/dataadpl.rc
 vendor/etc/init/dataqti.rc
