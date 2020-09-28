@@ -85,13 +85,11 @@ vendor/lib/vendor.qti.hardware.alarm@1.0.so
 vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 
-# ANT+ - LA.UM.8.6.2.r1-08400-89xx.0
--lib/libantradio.so
--lib64/libantradio.so
-vendor/lib/com.qualcomm.qti.ant@1.0.so
-vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so
-vendor/lib64/com.qualcomm.qti.ant@1.0.so
-vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
+# ANT+ - from LA.UM.9.6.2.r1-02100-89xx.0
+-system_ext/lib/libantradio.so
+-system_ext/lib64/libantradio.so
+system_ext/lib/com.qualcomm.qti.ant@1.0.so
+system_ext/lib64/com.qualcomm.qti.ant@1.0.so
 
 # Audio - LA.UM.8.6.2.r1-08400-89xx.0
 vendor/lib/libI420colorconvert.so
