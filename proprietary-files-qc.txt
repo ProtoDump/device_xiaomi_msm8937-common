@@ -83,9 +83,8 @@ vendor/lib64/libsdm-disp-vndapis.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
 
-# Alarm - LA.UM.8.6.2.r1-08400-89xx.0
+# Alarm - from LA.UM.9.6.2.r1-02100-89xx.0
 -product/app/PowerOffAlarm/PowerOffAlarm.apk
-product/framework/vendor.qti.hardware.alarm-V1.0-java.jar
 vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service
 vendor/bin/power_off_alarm
 vendor/etc/init/vendor.qti.hardware.alarm@1.0-service.rc
