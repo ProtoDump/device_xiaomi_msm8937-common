@@ -91,7 +91,7 @@ vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 system_ext/lib/com.qualcomm.qti.ant@1.0.so
 system_ext/lib64/com.qualcomm.qti.ant@1.0.so
 
-# Audio - LA.UM.8.6.2.r1-08400-89xx.0
+# Audio - from LA.UM.9.6.2.r1-02100-89xx.0
 vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAlacDec.so
@@ -113,7 +113,6 @@ vendor/lib/libadiertac.so
 vendor/lib/libadm.so
 vendor/lib/libaudcal.so
 vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal_proprietary.so
 vendor/lib/libqtigef.so
 vendor/lib/libsmwrapper.so
 vendor/lib/soundfx/libasphere.so
@@ -138,7 +137,6 @@ vendor/lib64/libacdbrtac.so
 vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
 vendor/lib64/libmm-color-convertor.so
-vendor/lib64/libmmosal_proprietary.so
 vendor/lib64/libqtigef.so
 vendor/lib64/soundfx/libasphere.so
 vendor/lib64/soundfx/libqcbassboost.so
