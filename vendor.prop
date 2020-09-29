@@ -52,6 +52,7 @@ persist.ts.rtmakeup=true
 
 # Charger
 ro.charger.enable_suspend=true
+ro.charger.disable_init_blank=true
 
 # CNE/DPM
 persist.vendor.cne.feature=1
