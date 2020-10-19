@@ -349,6 +349,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libcamshim
 
+# Signapk
+PRODUCT_HOST_PACKAGES += \
+    signapk
+
 # Telephony
 PRODUCT_PACKAGES += \
     ims-ext-common_system \
