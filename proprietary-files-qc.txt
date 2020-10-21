@@ -32,16 +32,13 @@ vendor/lib/egl/eglSubDriverAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
 vendor/lib/egl/libGLESv2_adreno.so
-vendor/lib/egl/libQTapGLES.so
 vendor/lib/egl/libq3dtools_adreno.so
 vendor/lib/egl/libq3dtools_esx.so
-vendor/lib/hw/vulkan.msm8953.so:vendor/lib/hw/vulkan.msm8937.so
+vendor/lib/hw/vulkan.adreno.so
 vendor/lib/libC2D2.so
 vendor/lib/libCB.so
 vendor/lib/libOpenCL.so
-vendor/lib/libRSDriver_adreno.so
 vendor/lib/libadreno_utils.so
-vendor/lib/libbccQTI.so
 vendor/lib/libc2d30_bltlib.so
 vendor/lib/libdisp-aba.so
 vendor/lib/libgsl.so
@@ -49,7 +46,6 @@ vendor/lib/libhdr_tm.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/librs_adreno.so
-vendor/lib/librs_adreno_sha1.so
 vendor/lib/libscalar.so
 vendor/lib/libsdedrm.so
 vendor/lib/libsdm-color.so
@@ -61,16 +57,13 @@ vendor/lib64/egl/eglSubDriverAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
 vendor/lib64/egl/libGLESv1_CM_adreno.so
 vendor/lib64/egl/libGLESv2_adreno.so
-vendor/lib64/egl/libQTapGLES.so
 vendor/lib64/egl/libq3dtools_adreno.so
 vendor/lib64/egl/libq3dtools_esx.so
-vendor/lib64/hw/vulkan.msm8953.so:vendor/lib64/hw/vulkan.msm8937.so
+vendor/lib64/hw/vulkan.adreno.so
 vendor/lib64/libC2D2.so
 vendor/lib64/libCB.so
 vendor/lib64/libOpenCL.so
-vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libadreno_utils.so
-vendor/lib64/libbccQTI.so
 vendor/lib64/libc2d30_bltlib.so
 vendor/lib64/libdisp-aba.so
 vendor/lib64/libgsl.so
@@ -78,7 +71,6 @@ vendor/lib64/libhdr_tm.so
 vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
 vendor/lib64/librs_adreno.so
-vendor/lib64/librs_adreno_sha1.so
 vendor/lib64/libscalar.so
 vendor/lib64/libsdedrm.so
 vendor/lib64/libsdm-color.so
@@ -189,7 +181,7 @@ vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
 vendor/lib64/vendor.qti.hardware.btconfigstore@1.0.so
 vendor/lib64/vendor.qti.hardware.fm@1.0.so
 
-# CNE - LA.UM.8.6.2.r1-08400-89xx.0
+# CNE - from LA.UM.9.6.2.r1-02100-89xx.0
 system_ext/lib/com.quicinc.cne.api@1.0.so
 system_ext/lib/com.quicinc.cne.api@1.1.so
 system_ext/lib/com.quicinc.cne.constants@1.0.so
@@ -254,7 +246,7 @@ vendor/lib64/vendor.qti.latency@2.0.so
 # Charger - from LA.UM.9.6.2.r1-02100-89xx.0
 vendor/bin/hvdcp_opti
 
-# DPM - LA.UM.8.6.2.r1-08400-89xx.0
+# DPM - from LA.UM.9.6.2.r1-02100-89xx.0
 vendor/lib/com.qualcomm.qti.dpm.api@1.0.so
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so
 
@@ -313,7 +305,7 @@ vendor/lib/libfastcvopt.so
 vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libfastcvopt.so
 
-# Gatekeeper - LA.UM.8.6.2.r1-08400-89xx.0
+# Gatekeeper - from LA.UM.8.6.2.r1-08400-89xx.0
 vendor/lib/hw/gatekeeper.msm8953.so:vendor/lib/hw/gatekeeper.msm8937.so
 vendor/lib64/hw/gatekeeper.msm8953.so:vendor/lib64/hw/gatekeeper.msm8937.so
 
@@ -384,11 +376,11 @@ vendor/lib64/libkeymasterutils.so
 vendor/lib64/libkeymasterprovision.so
 vendor/lib64/libkeymasterdeviceutils.so
 
-# Listen - LA.UM.8.6.2.r1-08400-89xx.0
-vendor/lib/hw/sound_trigger.primary.msm8953.so:vendor/lib/hw/sound_trigger.primary.msm8937.so
+# Listen - from LA.UM.9.6.2.r1-02100-89xx.0
+vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
-vendor/lib64/hw/sound_trigger.primary.msm8953.so:vendor/lib64/hw/sound_trigger.primary.msm8937.so
+vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
 # Media - from LA.UM.9.6.2.r1-02100-89xx.0
 vendor/lib/libUBWC.so
