@@ -76,6 +76,7 @@ dalvik.vm.heapminfree=512k
 dalvik.vm.heapmaxfree=8m
 
 # Display
+debug.hwui.renderer=skiavk
 ro.opengles.version=196610
 ro.sf.lcd_density=320
 debug.sf.enable_hwc_vds=0
