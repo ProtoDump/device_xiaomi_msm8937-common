@@ -68,6 +68,7 @@ dalvik.vm.dex2oat-threads=4
 dalvik.vm.image-dex2oat-threads=4
 dalvik.vm.dex2oat-filter=speed
 dalvik.vm.image-dex2oat-filter=speed
+dalvik.vm.dex2oat64.enabled=true
 dalvik.vm.heapgrowthlimit=256m
 dalvik.vm.heapstartsize=8m
 dalvik.vm.heapsize=512m
