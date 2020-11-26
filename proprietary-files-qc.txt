@@ -463,7 +463,7 @@ vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
 
-# QMI - from LA.UM.8.6.r1
+# QMI - from LA.UM.9.6.2.r1-02100-89xx.0
 vendor/lib/libpdmapper.so
 vendor/lib/libqmi_cci.so
 vendor/lib64/libpdmapper.so
@@ -484,7 +484,6 @@ vendor/bin/hw/qcrild
 vendor/bin/ATFWD-daemon
 vendor/bin/ipacm-diag
 vendor/bin/netmgrd
-vendor/bin/port-bridge
 vendor/bin/qti
 vendor/bin/rmt_storage
 vendor/bin/tftp_server
@@ -561,10 +560,14 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - LA.UM.8.6.r1
--product/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+# Radio - from LA.UM.9.6.2.r1-02100-89xx.0
+-system_ext/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+system_ext/etc/permissions/qcrilhook.xml
 product/etc/permissions/telephony_product_privapp-permissions-qti.xml
+system_ext/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
+system_ext/etc/permissions/telephonyservice.xml
 vendor/bin/adpl
+vendor/bin/port-bridge
 vendor/etc/init/dataadpl.rc
 vendor/etc/init/dataqti.rc
 vendor/etc/init/netmgrd.rc
@@ -587,10 +590,6 @@ lib/com.qualcomm.qti.imscmservice@1.0.so
 lib/com.qualcomm.qti.imscmservice@2.0.so
 lib/com.qualcomm.qti.imscmservice@2.1.so
 lib64/com.qualcomm.qti.uceservice@2.0.so
-lib/lib-imscamera.so
-lib/lib-imsvideocodec.so
-lib/lib-imsvtextutils.so
-lib/lib-imsvtutils.so
 lib/libmmrtpdecoder.so
 lib/libmmrtpencoder.so
 lib/librcc.so
@@ -602,11 +601,6 @@ lib64/com.qualcomm.qti.imscmservice@1.0.so
 lib64/com.qualcomm.qti.imscmservice@2.0.so
 lib64/com.qualcomm.qti.imscmservice@2.1.so
 lib64/com.qualcomm.qti.uceservice@2.0.so
-lib64/lib-imscamera.so
-lib64/lib-imsvideocodec.so
-lib64/lib-imsvt.so
-lib64/lib-imsvtextutils.so
-lib64/lib-imsvtutils.so
 lib64/libmmrtpdecoder.so
 lib64/libmmrtpencoder.so
 lib64/librcc.so
@@ -673,11 +667,21 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
 
-# Radio - IMS - LA.UM.8.6.r1
-product/lib64/libimscamera_jni.so
-product/lib64/libimsmedia_jni.so
--product/priv-app/ims/ims.apk
+# Radio - IMS - from LA.UM.9.6.2.r1-02100-89xx.0
+system_ext/lib64/libimscamera_jni.so
+system_ext/lib64/libimsmedia_jni.so
+-system_ext/priv-app/ims/ims.apk
+vendor/etc/init/ims_rtp_daemon_legacy.rc
+vendor/etc/init/imsdatadaemon.rc
+vendor/etc/init/imsqmidaemon.rc
+vendor/etc/init/imsrcsd.rc
 vendor/lib64/vendor.qti.ims.rcsconfig@1.1.so
+system_ext/lib64/lib-imscamera.so
+system_ext/lib64/lib-imsvideocodec.so
+system_ext/lib64/lib-imsvt.so
+system_ext/lib64/lib-imsvtextutils.so
+system_ext/lib64/lib-imsvtutils.so
+vendor/lib64/lib-imsvtcore.so
 
 # Sensors - from TA-1024
 -framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar
