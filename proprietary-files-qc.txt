@@ -474,10 +474,8 @@ vendor/lib64/libqsocket.so
 -app/QtiTelephonyService/QtiTelephonyService.apk
 etc/permissions/lpa.xml
 etc/permissions/telephonyservice.xml
-etc/permissions/qcrilhook.xml
 -framework/embmslibrary.jar
 -framework/QtiTelephonyServicelibrary.jar
--framework/qcrilhook.jar
 -framework/uimlpalibrary.jar
 -framework/uimremotesimlocklibrary.jar
 vendor/bin/hw/qcrild
@@ -517,7 +515,6 @@ vendor/lib/qcrild_librilutils.so
 vendor/lib/vendor.qti.hardware.radio.am@1.0.so
 vendor/lib/vendor.qti.hardware.radio.atcmdfwd@1.0.so
 vendor/lib/vendor.qti.hardware.radio.lpa@1.0.so
-vendor/lib/vendor.qti.hardware.radio.qcrilhook@1.0.so
 vendor/lib/vendor.qti.hardware.radio.qtiradio@1.0.so
 vendor/lib/vendor.qti.hardware.radio.qtiradio@2.0.so
 vendor/lib/vendor.qti.hardware.radio.uim@1.0.so
@@ -551,7 +548,6 @@ vendor/lib64/qcrild_librilutils.so
 vendor/lib64/vendor.qti.hardware.radio.am@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.lpa@1.0.so
-vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.qtiradio@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.0.so
@@ -562,6 +558,7 @@ vendor/radio/qcril_database/qcril.db
 
 # Radio - from LA.UM.9.6.2.r1-02100-89xx.0
 -system_ext/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+-system_ext/framework/qcrilhook.jar
 system_ext/etc/permissions/qcrilhook.xml
 product/etc/permissions/telephony_product_privapp-permissions-qti.xml
 system_ext/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
@@ -574,6 +571,8 @@ vendor/etc/init/netmgrd.rc
 vendor/etc/init/port-bridge.rc
 vendor/etc/init/vendor.qti.rmt_storage.rc
 vendor/etc/init/vendor.qti.tftp.rc
+vendor/lib/vendor.qti.hardware.radio.qcrilhook@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0.so
 
 # Radio - IMS - from Panther
 -app/imssettings/imssettings.apk
