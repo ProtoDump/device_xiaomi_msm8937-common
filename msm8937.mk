@@ -167,14 +167,16 @@ PRODUCT_PACKAGES += \
     gralloc.msm8937 \
     hwcomposer.msm8937 \
     memtrack.msm8937 \
-    libdisplayconfig \
+    libdisplayconfig.qti \
+    libdisplayconfig.qti.vendor \
     libhwc2on1adapter \
     libgenlock \
     libtinyxml \
     libqdMetaData.system \
     libqti_vndfwk_detect \
-    libqti_vndfwk_detect.vendor
-
+    libqti_vndfwk_detect.vendor \
+    vendor.display.config@2.0 \
+    vendor.display.config@2.0.vendor
 
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
