@@ -143,8 +143,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
+    android.hardware.camera.device@3.2 \
+    android.hardware.camera.device@3.3 \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service \
+    android.hardware.camera.provider@2.5 \
     vendor.qti.hardware.camera.device@1.0 \
     vendor.qti.hardware.camera.device@1.0_vendor \
     Snap
@@ -172,6 +175,7 @@ PRODUCT_PACKAGES += \
     libhwc2on1adapter \
     libgenlock \
     libtinyxml \
+    libqdMetaData \
     libqdMetaData.system \
     libqti_vndfwk_detect \
     libqti_vndfwk_detect.vendor \
@@ -336,7 +340,9 @@ PRODUCT_PACKAGES += \
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
+    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/seccomp/imsrtp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/imsrtp.policy \
+    $(LOCAL_PATH)/seccomp/atfwd@2.0.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/atfwd@2.0.policy
 
 # Sensors
 PRODUCT_PACKAGES += \

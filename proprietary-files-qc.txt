@@ -1,4 +1,4 @@
-# ADSP - from LA.UM.9.6.2.r1-02100-89xx.0
+# ADSP - from LA.UM.9.6.2.r1-03600-89xx.0
 system_ext/lib/vendor.qti.hardware.dsp@1.0.so
 system_ext/lib64/vendor.qti.hardware.dsp@1.0.so
 vendor/bin/adsprpcd
@@ -19,7 +19,7 @@ vendor/lib64/libsdsprpc.so
 vendor/lib64/libsysmon_cdsp_skel.so
 vendor/lib64/vendor.qti.hardware.dsp@1.0.so
 
-# ADSP [Modules] - from LA.UM.9.6.2.r1-02100-89xx.0
+# ADSP [Modules] - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
@@ -27,7 +27,7 @@ vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
 vendor/lib/rfsa/adsp/libscveT2T_skel.so
 
-# Adreno - LA.UM.9.6.2.r1-02100-89xx.0
+# Adreno - LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/egl/eglSubDriverAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
@@ -79,7 +79,7 @@ vendor/lib64/libsdm-disp-vndapis.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
 
-# Alarm - from LA.UM.9.6.2.r1-02100-89xx.0
+# Alarm - from LA.UM.9.6.2.r1-03600-89xx.0
 -product/app/PowerOffAlarm/PowerOffAlarm.apk
 vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service
 vendor/bin/power_off_alarm
@@ -89,13 +89,13 @@ vendor/lib/vendor.qti.hardware.alarm@1.0.so
 vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 
-# ANT+ - from LA.UM.9.6.2.r1-02100-89xx.0
+# ANT+ - from LA.UM.9.6.2.r1-03600-89xx.0
 -system_ext/lib/libantradio.so
 -system_ext/lib64/libantradio.so
 system_ext/lib/com.qualcomm.qti.ant@1.0.so
 system_ext/lib64/com.qualcomm.qti.ant@1.0.so
 
-# Audio - from LA.UM.9.6.2.r1-02100-89xx.0
+# Audio - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAlacDec.so
@@ -149,7 +149,7 @@ vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
 
-# Bluetooth - from LA.UM.9.6.2.r1-02100-89xx.0
+# Bluetooth - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so
@@ -185,7 +185,7 @@ vendor/lib64/vendor.qti.hardware.btconfigstore@1.0.so
 vendor/lib64/vendor.qti.hardware.btconfigstore@2.0.so
 vendor/lib64/vendor.qti.hardware.fm@1.0.so
 
-# CNE - from LA.UM.9.6.2.r1-02100-89xx.0
+# CNE - from LA.UM.9.6.2.r1-03600-89xx.0
 system_ext/lib/com.quicinc.cne.api@1.0.so
 system_ext/lib/com.quicinc.cne.api@1.1.so
 system_ext/lib/com.quicinc.cne.constants@1.0.so
@@ -250,14 +250,14 @@ vendor/lib64/vendor.qti.hardware.slmadapter@1.0.so
 vendor/lib64/vendor.qti.hardware.data.qmi@1.0.so
 vendor/lib64/vendor.qti.latency@2.0.so
 
-# Charger - from LA.UM.9.6.2.r1-02100-89xx.0
+# Charger - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/bin/hvdcp_opti
 
-# DPM - from LA.UM.9.6.2.r1-02100-89xx.0
+# DPM - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/com.qualcomm.qti.dpm.api@1.0.so
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so
 
-# Secure MSM - from LA.UM.9.6.2.r1-02100-89xx.0
+# Secure MSM - from LA.UM.9.6.2.r1-03600-89xx.0
 system_ext/lib/vendor.qti.hardware.tui_comm@1.0.so
 system_ext/lib64/vendor.qti.hardware.tui_comm@1.0.so
 vendor/bin/qseecomd
@@ -306,7 +306,7 @@ vendor/lib/liboemcrypto.so|7747d6c69404c4128534386393e069bf3993cf75
 vendor/lib/libwvhidl.so|3959312fdf6131dbbd194f42299bb941608c36ba
 vendor/lib64/liboemcrypto.so|6d03178c12b691e21ee84d85da42f5eb9ba8797a
 
-# FastCV - from LA.UM.9.6.2.r1-02100-89xx.0
+# FastCV - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib64/libfastcvadsp_stub.so
@@ -316,7 +316,7 @@ vendor/lib64/libfastcvopt.so
 vendor/lib/hw/gatekeeper.msm8953.so:vendor/lib/hw/gatekeeper.msm8937.so
 vendor/lib64/hw/gatekeeper.msm8953.so:vendor/lib64/hw/gatekeeper.msm8937.so
 
-# GPS - from LA.UM.9.6.2.r1-02100-89xx.0
+# GPS - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/bin/hw/android.hardware.gnss@2.1-service-qti
 vendor/bin/loc_launcher
 vendor/bin/lowi-server
@@ -377,7 +377,7 @@ vendor/lib64/vendor.qti.gnss@3.0.so
 vendor/lib64/vendor.qti.gnss@4.0-service.so
 vendor/lib64/vendor.qti.gnss@4.0.so
 
-# Graphics firmware - from LA.UM.9.6.2.r1-02100-89xx.0
+# Graphics firmware - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/firmware/a530_gpmu.fw2
 vendor/firmware/a530_pfp.fw
 vendor/firmware/a530_pm4.fw
@@ -398,13 +398,13 @@ vendor/lib64/libkeymasterutils.so
 vendor/lib64/libkeymasterprovision.so
 vendor/lib64/libkeymasterdeviceutils.so
 
-# Listen - from LA.UM.9.6.2.r1-02100-89xx.0
+# Listen - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
-# Media - from LA.UM.9.6.2.r1-02100-89xx.0
+# Media - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/libUBWC.so
 vendor/lib/libfastcrc.so
 vendor/lib/libstreamparser.so
@@ -415,17 +415,17 @@ vendor/lib64/libfastcrc.so
 vendor/lib64/libstreamparser.so
 vendor/lib64/libvideoutils.so
 
-# Perf - from LA.UM.9.6.2.r1-02100-89xx.0
+# Perf - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/libqti-perfd-client.so
 vendor/lib64/libqti-perfd-client.so
 
-# Peripheral - from LA.UM.9.6.2.r1-02100-89xx.00
+# Peripheral - from LA.UM.9.6.2.r1-03600-89xx.00
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
-# Postprocessing - from LA.UM.9.6.2.r1-02100-89xx.0
+# Postprocessing - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/bin/hw/vendor.display.color@1.0-service
 vendor/bin/mm-pp-dpps
 vendor/etc/init/vendor.display.color@1.0-service.rc
@@ -435,87 +435,100 @@ vendor/lib64/vendor.display.color@1.0.so
 vendor/lib64/vendor.display.postproc@1.0.so
 
 # QMI - from Panther
-lib/libdiag_system.so
-lib/libqmi_cci_system.so
-lib64/libdiag_system.so
-lib64/libqmi_cci_system.so
-etc/permissions/qti_permissions.xml
-vendor/bin/irsc_util
-vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
+vendor/lib64/libdsi_netctrl.so
 vendor/lib/libdsutils.so
+vendor/lib64/libdsutils.so
 vendor/lib/libidl.so
-vendor/lib/libqcci_legacy.so
+vendor/lib64/libidl.so
 vendor/lib/libqdi.so
+vendor/lib64/libqdi.so
 vendor/lib/libqdp.so
 vendor/lib/libqmi.so
-vendor/lib/libqmi_client_helper.so
-vendor/lib/libqmi_client_qmux.so
-vendor/lib/libqmi_common_so.so
-vendor/lib/libqmi_csi.so
-vendor/lib/libqmi_encdec.so
-vendor/lib/libqmiservices.so
-vendor/lib64/libdiag.so
-vendor/lib64/libdsi_netctrl.so
-vendor/lib64/libdsutils.so
-vendor/lib64/libidl.so
-vendor/lib64/libqcci_legacy.so
-vendor/lib64/libqdi.so
 vendor/lib64/libqdp.so
 vendor/lib64/libqmi.so
-vendor/lib64/libqmi_client_helper.so
-vendor/lib64/libqmi_client_qmux.so
-vendor/lib64/libqmi_common_so.so
-vendor/lib64/libqmi_csi.so
-vendor/lib64/libqmi_encdec.so
+vendor/lib/libqmiservices.so
 vendor/lib64/libqmiservices.so
 
-# QMI - from LA.UM.9.6.2.r1-02100-89xx.0
+# QMI - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/lib/libpdmapper.so
 vendor/lib/libqmi_cci.so
 vendor/lib64/libpdmapper.so
 vendor/lib64/libqmi_cci.so
 vendor/lib64/libqsocket.so
+system_ext/lib/libdiag_system.so
+system_ext/lib/libqmi_cci_system.so
+system_ext/lib64/libdiag_system.so
+system_ext/lib64/libqmi_cci_system.so
+system_ext/etc/permissions/qti_permissions.xml
+vendor/bin/irsc_util
+vendor/lib/libdiag.so
+vendor/lib/libqcci_legacy.so
+vendor/lib/libqmi_client_helper.so
+vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib64/libdiag.so
+vendor/lib64/libqcci_legacy.so
+vendor/lib64/libqmi_client_helper.so
+vendor/lib64/libqmi_client_qmux.so
+vendor/lib64/libqmi_common_so.so
+vendor/lib64/libqmi_csi.so
+vendor/lib64/libqmi_encdec.so
 
 # Radio - from Panther
--app/QtiTelephonyService/QtiTelephonyService.apk
-etc/permissions/lpa.xml
-etc/permissions/telephonyservice.xml
--framework/embmslibrary.jar
--framework/QtiTelephonyServicelibrary.jar
--framework/uimlpalibrary.jar
--framework/uimremotesimlocklibrary.jar
-vendor/bin/hw/qcrild
-vendor/bin/ATFWD-daemon
-vendor/bin/ipacm-diag
 vendor/bin/netmgrd
-vendor/bin/qti
-vendor/bin/rmt_storage
-vendor/bin/tftp_server
 vendor/etc/data/dsi_config.xml
-vendor/etc/data/netmgr_config.xml|5f1e66147d95353b93f25860eb8b0491b259787d
-vendor/etc/init/qcrild.rc
+vendor/etc/data/netmgr_config.xml
 vendor/lib/libconfigdb.so
 vendor/lib/liblqe.so
-vendor/lib/libmdmdetect.so
+vendor/lib64/libconfigdb.so
+vendor/lib64/liblqe.so
+vendor/lib64/libnetmgr.so
+vendor/lib64/libnetmgr_common.so
 vendor/lib/libnetmgr.so
 vendor/lib/libnetmgr_common.so
-vendor/lib/libnetmgr_nr_fusion.so
-vendor/lib/libnetmgr_rmnet_ext.so
 vendor/lib/libnlnetmgr.so
-vendor/lib/liboemaids_vendor.so
-vendor/lib/libpdmapper.so
-vendor/lib/libpdnotifier.so
+vendor/lib64/libnlnetmgr.so
+vendor/lib64/libqcmaputils.so
 vendor/lib/libqcmaputils.so
-vendor/lib/libqcrilFramework.so
+vendor/lib64/libqrtr.so
 vendor/lib/libqrtr.so
-vendor/lib/libqsocket.so
-vendor/lib/libril-qc-hal-qmi.so
+vendor/lib64/libril-qc-ltedirectdisc.so
+vendor/lib64/libril-qc-qmi-1.so
+vendor/lib64/libril-qc-radioconfig.so
 vendor/lib/libril-qc-ltedirectdisc.so
 vendor/lib/libril-qc-qmi-1.so
 vendor/lib/libril-qc-radioconfig.so
-vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/librilqmiservices.so
+vendor/lib64/librilqmiservices.so
+vendor/radio/qcril_database/qcril.db
+
+# Radio - from LA.UM.9.6.2.r1-03600-89xx.0
+-system_ext/app/QtiTelephonyService/QtiTelephonyService.apk
+system_ext/etc/permissions/lpa.xml
+system_ext/etc/permissions/telephonyservice.xml
+-system_ext/framework/embmslibrary.jar
+-system_ext/framework/uimlpalibrary.jar
+-system_ext/framework/uimremotesimlocklibrary.jar
+vendor/bin/hw/qcrild
+vendor/bin/ATFWD-daemon
+vendor/bin/ipacm-diag
+vendor/bin/qti
+vendor/bin/rmt_storage
+vendor/bin/tftp_server
+vendor/etc/init/qcrild.rc
+vendor/lib/libmdmdetect.so
+vendor/lib/libnetmgr_nr_fusion.so
+vendor/lib/libnetmgr_rmnet_ext.so
+vendor/lib/liboemaids_vendor.so
+vendor/lib/libpdmapper.so
+vendor/lib/libpdnotifier.so
+vendor/lib/libqcrilFramework.so
+vendor/lib/libqsocket.so
+vendor/lib/libril-qc-hal-qmi.so
+vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/libsettings.so
 vendor/lib/libsystem_health_mon.so
 vendor/lib/qcrild_librilutils.so
@@ -528,27 +541,16 @@ vendor/lib/vendor.qti.hardware.radio.uim@1.0.so
 vendor/lib/vendor.qti.hardware.radio.uim@1.1.so
 vendor/lib/vendor.qti.hardware.radio.uim_remote_client@1.0.so
 vendor/lib/vendor.qti.hardware.radio.uim_remote_server@1.0.so
-vendor/lib64/libconfigdb.so
-vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
-vendor/lib64/libnetmgr.so
-vendor/lib64/libnetmgr_common.so
 vendor/lib64/libnetmgr_nr_fusion.so
 vendor/lib64/libnetmgr_rmnet_ext.so
-vendor/lib64/libnlnetmgr.so
 vendor/lib64/liboemaids_vendor.so
 vendor/lib64/libpdmapper.so
 vendor/lib64/libpdnotifier.so
-vendor/lib64/libqcmaputils.so
 vendor/lib64/libqcrilFramework.so
-vendor/lib64/libqrtr.so
 vendor/lib64/libqsocket.so
 vendor/lib64/libril-qc-hal-qmi.so
-vendor/lib64/libril-qc-ltedirectdisc.so
-vendor/lib64/libril-qc-qmi-1.so
-vendor/lib64/libril-qc-radioconfig.so
 vendor/lib64/libril-qcril-hook-oem.so
-vendor/lib64/librilqmiservices.so
 vendor/lib64/libsettings.so
 vendor/lib64/libsystem_health_mon.so
 vendor/lib64/qcrild_librilutils.so
@@ -561,9 +563,6 @@ vendor/lib64/vendor.qti.hardware.radio.uim@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.1.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0.so
-vendor/radio/qcril_database/qcril.db
-
-# Radio - from LA.UM.9.6.2.r1-02100-89xx.0
 -system_ext/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 -system_ext/framework/qcrilhook.jar
 system_ext/etc/permissions/qcrilhook.xml
@@ -582,47 +581,66 @@ vendor/lib/vendor.qti.hardware.radio.qcrilhook@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0.so
 
 # Radio - IMS - from Panther
--app/imssettings/imssettings.apk
--app/uceShimService/uceShimService.apk
-etc/permissions/com.qualcomm.qti.imscmservice.xml
-etc/permissions/com.qualcomm.qti.imscmservice-V2.0-java.xml
-etc/permissions/com.qualcomm.qti.imscmservice-V2.1-java.xml
--framework/com.qualcomm.qti.imscmservice-V2.0-java.jar
--framework/com.qualcomm.qti.imscmservice-V2.1-java.jar
--framework/com.qualcomm.qti.uceservice-V2.0-java.jar
--framework/vendor.qti.ims.callinfo-V1.0-java.jar
--framework/vendor.qti.ims.rcsconfig-V1.0-java.jar
-lib/com.qualcomm.qti.imscmservice@1.0.so
-lib/com.qualcomm.qti.imscmservice@2.0.so
-lib/com.qualcomm.qti.imscmservice@2.1.so
-lib64/com.qualcomm.qti.uceservice@2.0.so
-lib/libmmrtpdecoder.so
-lib/libmmrtpencoder.so
-lib/librcc.so
-lib/librtp_jni.so
-lib/vendor.qti.imsrtpservice@1.0.so
-lib/vendor.qti.ims.callinfo@1.0.so
-lib/vendor.qti.ims.rcsconfig@1.0.so
-lib64/com.qualcomm.qti.imscmservice@1.0.so
-lib64/com.qualcomm.qti.imscmservice@2.0.so
-lib64/com.qualcomm.qti.imscmservice@2.1.so
-lib64/com.qualcomm.qti.uceservice@2.0.so
-lib64/libmmrtpdecoder.so
-lib64/libmmrtpencoder.so
-lib64/librcc.so
-lib64/librtp_jni.so
-lib64/vendor.qti.imsrtpservice@1.0.so
-lib64/vendor.qti.ims.callinfo@1.0.so
-lib64/vendor.qti.ims.rcsconfig@1.0.so
-vendor/bin/ims_rtp_daemon
 vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
+
+# Radio - IMS - from LA.UM.9.6.2.r1-03600-89xx.0
+system_ext/lib/com.qualcomm.qti.imscmservice@2.2.so
+system_ext/lib64/com.qualcomm.qti.imscmservice@2.2.so
+system_ext/lib/vendor.qti.imsrtpservice@3.0.so
+system_ext/lib64/vendor.qti.imsrtpservice@3.0.so
+vendor/lib/com.qualcomm.qti.imscmservice@2.2.so
+vendor/lib64/com.qualcomm.qti.imscmservice@2.2.so
+vendor/lib/com.qualcomm.qti.uceservice@2.2.so
+vendor/lib64/com.qualcomm.qti.uceservice@2.2.so
+vendor/lib/com.qualcomm.qti.uceservice@2.1.so
+vendor/lib64/com.qualcomm.qti.uceservice@2.1.so
+vendor/lib/vendor.qti.ims.factory@1.0.so
+vendor/lib64/vendor.qti.ims.factory@1.0.so
+vendor/lib/vendor.qti.ims.callcapability@1.0.so
+vendor/lib64/vendor.qti.ims.callcapability@1.0.so
+vendor/lib/vendor.qti.ims.rcsconfig@2.0.so
+vendor/lib64/vendor.qti.ims.rcsconfig@2.0.so
+vendor/lib/vendor.qti.imsrtpservice@3.0.so
+vendor/lib64/vendor.qti.imsrtpservice@3.0.so
+vendor/lib/librcc.so
+vendor/lib64/librcc.so
+vendor/lib/vendor.qti.imsrtpservice@3.0-service-Impl.so
+vendor/lib64/vendor.qti.imsrtpservice@3.0-service-Impl.so
+-system_ext/app/imssettings/imssettings.apk
+-system_ext/app/uceShimService/uceShimService.apk
+system_ext/etc/permissions/com.qualcomm.qti.imscmservice.xml
+system_ext/etc/permissions/com.qualcomm.qti.imscmservice-V2.0-java.xml
+system_ext/etc/permissions/com.qualcomm.qti.imscmservice-V2.1-java.xml
+-system_ext/framework/com.qualcomm.qti.imscmservice-V2.0-java.jar
+-system_ext/framework/com.qualcomm.qti.imscmservice-V2.1-java.jar
+-system_ext/framework/com.qualcomm.qti.uceservice-V2.0-java.jar
+-system_ext/framework/vendor.qti.ims.callinfo-V1.0-java.jar
+-system_ext/framework/vendor.qti.ims.rcsconfig-V1.0-java.jar
+system_ext/lib/com.qualcomm.qti.imscmservice@1.0.so
+system_ext/lib/com.qualcomm.qti.imscmservice@2.0.so
+system_ext/lib/com.qualcomm.qti.imscmservice@2.1.so
+system_ext/lib64/com.qualcomm.qti.uceservice@2.0.so
+lib/libmmrtpdecoder.so
+lib/libmmrtpencoder.so
+lib/librtp_jni.so
+system_ext/lib/vendor.qti.ims.callinfo@1.0.so
+system_ext/lib/vendor.qti.ims.rcsconfig@1.0.so
+system_ext/lib64/com.qualcomm.qti.imscmservice@1.0.so
+system_ext/lib64/com.qualcomm.qti.imscmservice@2.0.so
+system_ext/lib64/com.qualcomm.qti.imscmservice@2.1.so
+system_ext/lib64/com.qualcomm.qti.uceservice@2.0.so
+lib64/libmmrtpdecoder.so
+lib64/libmmrtpencoder.so
+lib64/librtp_jni.so
+system_ext/lib64/vendor.qti.ims.callinfo@1.0.so
+system_ext/lib64/vendor.qti.ims.rcsconfig@1.0.so
+vendor/bin/ims_rtp_daemon
 vendor/bin/imsrcsd
 vendor/lib/com.qualcomm.qti.imscmservice@1.0.so
 vendor/lib/com.qualcomm.qti.imscmservice@2.0.so
 vendor/lib/com.qualcomm.qti.imscmservice@2.1.so
 vendor/lib/com.qualcomm.qti.uceservice@2.0.so
-vendor/lib/lib-dplmedia.so
 vendor/lib/lib-imsSDP.so
 vendor/lib/lib-imscmservice.so
 vendor/lib/lib-imsdpl.so
@@ -632,7 +650,6 @@ vendor/lib/lib-imsrcsbaseimpl.so
 vendor/lib/lib-imsxml.so
 vendor/lib/lib-rtpcommon.so
 vendor/lib/lib-rtpcore.so
-vendor/lib/lib-rtpdaemoninterface.so
 vendor/lib/lib-rtpsl.so
 vendor/lib/lib-siputility.so
 vendor/lib/lib-uceservice.so
@@ -641,15 +658,12 @@ vendor/lib/vendor.qti.hardware.radio.ims@1.1.so
 vendor/lib/vendor.qti.hardware.radio.ims@1.2.so
 vendor/lib/vendor.qti.hardware.radio.ims@1.3.so
 vendor/lib/vendor.qti.hardware.radio.ims@1.4.so
-vendor/lib/vendor.qti.imsrtpservice@1.0-service-Impl.so
-vendor/lib/vendor.qti.imsrtpservice@1.0.so
 vendor/lib/vendor.qti.ims.callinfo@1.0.so
 vendor/lib/vendor.qti.ims.rcsconfig@1.0.so
 vendor/lib64/com.qualcomm.qti.imscmservice@1.0.so
 vendor/lib64/com.qualcomm.qti.imscmservice@2.0.so
 vendor/lib64/com.qualcomm.qti.imscmservice@2.1.so
 vendor/lib64/com.qualcomm.qti.uceservice@2.0.so
-vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-imsSDP.so
 vendor/lib64/lib-imscmservice.so
 vendor/lib64/lib-imsdpl.so
@@ -659,7 +673,6 @@ vendor/lib64/lib-imsrcsbaseimpl.so
 vendor/lib64/lib-imsxml.so
 vendor/lib64/lib-rtpcommon.so
 vendor/lib64/lib-rtpcore.so
-vendor/lib64/lib-rtpdaemoninterface.so
 vendor/lib64/lib-rtpsl.so
 vendor/lib64/lib-siputility.so
 vendor/lib64/lib-uceservice.so
@@ -668,12 +681,8 @@ vendor/lib64/vendor.qti.hardware.radio.ims@1.1.so
 vendor/lib64/vendor.qti.hardware.radio.ims@1.2.so
 vendor/lib64/vendor.qti.hardware.radio.ims@1.3.so
 vendor/lib64/vendor.qti.hardware.radio.ims@1.4.so
-vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
-vendor/lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
-
-# Radio - IMS - from LA.UM.9.6.2.r1-02100-89xx.0
 system_ext/lib64/libimscamera_jni.so
 system_ext/lib64/libimsmedia_jni.so
 -system_ext/priv-app/ims/ims.apk
@@ -709,12 +718,12 @@ vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
 vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
 
-# Thermal - from LA.UM.9.6.2.r1-02100-89xx.0
+# Thermal - from LA.UM.9.6.2.r1-03600-89xx.0
 vendor/bin/thermal-engine
 -vendor/lib/libthermalclient.so
 -vendor/lib64/libthermalclient.so
 
-# Time services - from LA.UM.9.6.2.r1-02100-89xx.00
+# Time services - from LA.UM.9.6.2.r1-03600-89xx.00
 -vendor/app/TimeService/TimeService.apk
 vendor/bin/time_daemon
 vendor/lib/libtime_genoff.so
@@ -723,7 +732,7 @@ vendor/lib64/libtime_genoff.so
 # Wi-Fi - from Panther
 vendor/bin/wcnss_service
 
-# WiFi Display - from LA.UM.9.6.2.r1-02100-89xx.0
+# WiFi Display - from LA.UM.9.6.2.r1-03600-89xx.0
 bin/wfdservice
 etc/init/wfdservice.rc
 etc/wfdconfig.xml
