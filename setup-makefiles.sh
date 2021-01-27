@@ -29,7 +29,7 @@ if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
 ARROW_ROOT="$MY_DIR"/../../..
 
-HELPER="$ARROW_ROOT"/vendor/arrow/build/tools/extract_utils.sh
+HELPER="$ARROW_ROOT"/tools/extract-utils/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
 
     echo "Unable to find helper script at $HELPER"
