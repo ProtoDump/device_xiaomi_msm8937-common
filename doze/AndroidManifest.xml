@@ -31,7 +31,7 @@
         android:targetSdkVersion="24"/>
 
     <application
-        android:label="@string/device_settings_app_name"
+        android:label="XiaomiDoze"
         android:persistent="true">
 
         <receiver android:name=".BootCompletedReceiver">
